@@ -1,0 +1,545 @@
+/* Shunyata Meditation API - Zen Theme Stylesheet */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --zen-stone: #f5f3f0;
+    --zen-sand: #e8e4df;
+    --zen-clay: #d4cfc7;
+    --zen-ink: #3a3a3a;
+    --zen-charcoal: #5c5c5c;
+    --zen-moss: #7a8b6e;
+    --zen-sage: #a8b5a0;
+    --zen-bamboo: #6b8e6b;
+    --zen-wood: #8b7355;
+    --zen-paper: #fefefe;
+    --zen-shadow: rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, var(--zen-stone) 0%, var(--zen-sand) 100%);
+    min-height: 100vh;
+    color: var(--zen-ink);
+    overflow-x: hidden;
+    line-height: 1.7;
+}
+
+/* Zen mist - subtle ink wash effect */
+.orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    animation: drift 25s infinite ease-in-out;
+    z-index: 0;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--zen-sage) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--zen-clay) 0%, transparent 70%);
+    bottom: -100px;
+    left: -100px;
+    animation-delay: -8s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--zen-moss) 0%, transparent 70%);
+    top: 40%;
+    left: 60%;
+    animation-delay: -16s;
+}
+
+@keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.12; }
+    33% { transform: translate(30px, -20px) scale(1.05); opacity: 0.18; }
+    66% { transform: translate(-20px, 30px) scale(0.95); opacity: 0.12; }
+}
+
+/* Zen stone garden - enso circles */
+.breathing-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0.08;
+}
+
+.breathing-circle {
+    width: 280px;
+    height: 280px;
+    border: 1px solid var(--zen-ink);
+    border-radius: 50%;
+    animation: enso 10s infinite ease-in-out;
+}
+
+.breathing-circle-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border: 1px solid var(--zen-charcoal);
+    border-radius: 50%;
+    animation: enso 10s infinite ease-in-out;
+    animation-delay: -3s;
+}
+
+.breathing-circle-3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--zen-moss);
+    border-radius: 50%;
+    animation: enso 10s infinite ease-in-out;
+    animation-delay: -6s;
+}
+
+@keyframes enso {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.5; }
+}
+
+/* Main content */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header - zen minimal */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--zen-moss);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: all 0.4s ease;
+}
+
+.logo:hover .logo-icon {
+    background: var(--zen-moss);
+    border-color: var(--zen-moss);
+}
+
+.logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: var(--zen-ink);
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    color: var(--zen-charcoal);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--zen-moss);
+    border-bottom-color: var(--zen-moss);
+}
+
+/* Hero Section - zen spacious */
+.hero {
+    text-align: center;
+    padding: 100px 0 100px;
+}
+
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 64px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 32px;
+    color: var(--zen-ink);
+    letter-spacing: 2px;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    color: var(--zen-charcoal);
+    max-width: 480px;
+    margin: 0 auto 56px;
+    line-height: 1.8;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 16px 36px;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: var(--zen-moss);
+    color: var(--zen-paper);
+    border: 1px solid var(--zen-moss);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--zen-moss);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--zen-charcoal);
+    border: 1px solid var(--zen-clay);
+}
+
+.btn-secondary:hover {
+    background: var(--zen-clay);
+    color: var(--zen-ink);
+    border-color: var(--zen-clay);
+}
+
+/* Features Section - zen paper cards */
+.features {
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 64px;
+    color: var(--zen-ink);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+}
+
+.feature-card {
+    background: var(--zen-paper);
+    border: 1px solid var(--zen-clay);
+    padding: 40px 32px;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--zen-moss);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover {
+    box-shadow: 0 8px 32px var(--zen-shadow);
+    transform: translateY(-6px);
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 1px solid var(--zen-moss);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    background: var(--zen-moss);
+}
+
+.feature-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--zen-ink);
+}
+
+.feature-card p {
+    font-size: 14px;
+    color: var(--zen-charcoal);
+    line-height: 1.7;
+}
+
+/* Meditation Types - zen stone badges */
+.meditation-types {
+    padding: 100px 0;
+}
+
+.types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+}
+
+.type-badge {
+    background: transparent;
+    border: 1px solid var(--zen-clay);
+    padding: 28px 16px;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.type-badge:hover {
+    background: var(--zen-paper);
+    border-color: var(--zen-moss);
+    box-shadow: 0 4px 16px var(--zen-shadow);
+}
+
+.type-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.type-name {
+    font-size: 11px;
+    color: var(--zen-charcoal);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* API Section - zen scroll styling */
+.api-section {
+    padding: 100px 0;
+}
+
+.api-card {
+    background: var(--zen-paper);
+    border: 1px solid var(--zen-clay);
+    padding: 48px;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.api-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 60px;
+    right: 60px;
+    height: 3px;
+    background: var(--zen-wood);
+}
+
+.api-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--zen-ink);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.code-block {
+    background: var(--zen-stone);
+    border: 1px solid var(--zen-clay);
+    padding: 24px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 12px;
+    overflow-x: auto;
+    margin: 24px 0 16px;
+    color: var(--zen-ink);
+}
+
+.code-block .method {
+    color: var(--zen-moss);
+}
+
+.code-block .url {
+    color: var(--zen-wood);
+}
+
+.endpoint {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dotted var(--zen-clay);
+}
+
+.method-badge {
+    padding: 4px 12px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid;
+}
+
+.method-get {
+    background: transparent;
+    color: var(--zen-moss);
+    border-color: var(--zen-moss);
+}
+
+.method-post {
+    background: transparent;
+    color: var(--zen-wood);
+    border-color: var(--zen-wood);
+}
+
+.endpoint-path {
+    color: var(--zen-ink);
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.endpoint-description {
+    color: var(--zen-charcoal);
+    font-size: 13px;
+    margin-bottom: 20px;
+    margin-left: 68px;
+    font-style: italic;
+}
+
+/* Footer - zen minimal */
+footer {
+    text-align: center;
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--zen-clay);
+    margin-top: 60px;
+}
+
+footer p {
+    color: var(--zen-charcoal);
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+footer .heart {
+    color: var(--zen-moss);
+}
+
+.footer-tagline {
+    margin-top: 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+/* Responsive - zen adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 24px;
+        padding: 32px 0;
+    }
+
+    .logo-text {
+        font-size: 26px;
+    }
+
+    nav {
+        gap: 28px;
+    }
+
+    .hero {
+        padding: 80px 0 60px;
+    }
+
+    .hero h1 {
+        letter-spacing: 1px;
+    }
+
+    .section-title {
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+
+    .api-card {
+        padding: 32px 24px;
+    }
+
+    .api-card::before {
+        left: 40px;
+        right: 40px;
+    }
+}

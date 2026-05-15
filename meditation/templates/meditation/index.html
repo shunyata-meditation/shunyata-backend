@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shunyata - Meditation Tracker API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
+</head>
+<body>
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Breathing Animation -->
+    <div class="breathing-container">
+        <div class="breathing-circle"></div>
+        <div class="breathing-circle-2"></div>
+        <div class="breathing-circle-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">🧘</div>
+                <span class="logo-text">Shunyata</span>
+            </div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="/api/docs/">API Docs</a>
+                <a href="/admin">Admin</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Find Your Center</h1>
+            <p class="hero-subtitle">
+                A serene meditation tracking API built for mindful developers. 
+                Track sessions, monitor progress, and cultivate peace through code.
+            </p>
+            <div class="cta-buttons">
+                <a href="/api/docs/" class="btn btn-primary">
+                    <span>Explore API</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="/admin" class="btn btn-secondary">Admin Panel</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <h2 class="section-title">Core Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Session Tracking</h3>
+                    <p>Log and monitor your meditation sessions with detailed timestamps, duration, and completion status.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure Authentication</h3>
+                    <p>JWT-based authentication ensures your meditation data stays private and secure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3>Multiple Techniques</h3>
+                    <p>Support for mindfulness, breathing, body scan, loving kindness, and walking meditation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Personal Notes</h3>
+                    <p>Record your thoughts, insights, and reflections after each meditation session.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meditation Types -->
+        <section class="meditation-types">
+            <h2 class="section-title">Supported Practices</h2>
+            <div class="types-grid">
+                <div class="type-badge">
+                    <div class="type-icon">🧠</div>
+                    <div class="type-name">Mindfulness</div>
+                </div>
+                <div class="type-badge">
+                    <div class="type-icon">🫁</div>
+                    <div class="type-name">Breathing</div>
+                </div>
+                <div class="type-badge">
+                    <div class="type-icon">🧘‍♀️</div>
+                    <div class="type-name">Body Scan</div>
+                </div>
+                <div class="type-badge">
+                    <div class="type-icon">💚</div>
+                    <div class="type-name">Loving Kindness</div>
+                </div>
+                <div class="type-badge">
+                    <div class="type-icon">🚶</div>
+                    <div class="type-name">Walking</div>
+                </div>
+                <div class="type-badge">
+                    <div class="type-icon">✨</div>
+                    <div class="type-name">Other</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Built with <span class="heart">♥</span> for mindful developers</p>
+            <p class="footer-tagline">Shunyata Meditation API</p>
+        </footer>
+    </div>
+    <script src="{% static 'meditation/js/main.js' %}"></script>
+</body>
+</html>
