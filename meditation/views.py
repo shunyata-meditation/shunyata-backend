@@ -89,6 +89,17 @@ class VerifyEmailView(APIView):
             verification_token = EmailVerificationToken.objects.get(token=token)  # type: ignore
 
             if verification_token.is_expired():
+                user = verification_token.user
+                username = user.username
+                email = user.email
+
+                verification_token.delete()
+                user.delete()
+
+                logger.info(
+                    f"Deleted expired token and inactive user: {username} ({email})"
+                )
+
                 return Response(
                     {"error": "Verification token has expired. Please register again."},
                     status=status.HTTP_400_BAD_REQUEST,
@@ -99,6 +110,8 @@ class VerifyEmailView(APIView):
             user.save()
 
             verification_token.delete()
+
+            logger.info(f"Email verified successfully for user: {user.username}")
 
             return Response(
                 {
