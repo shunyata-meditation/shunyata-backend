@@ -1,7 +1,12 @@
+from django.shortcuts import render
 from rest_framework import permissions, viewsets
 
 from meditation.models import MeditationSession
 from meditation.serializers import MeditationSessionSerializer
+
+
+def index(request):
+    return render(request, "meditation/index.html")
 
 
 class MeditationSessionViewSet(viewsets.ModelViewSet):
