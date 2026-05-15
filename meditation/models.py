@@ -19,7 +19,7 @@ class MeditationSession(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     duration = models.DurationField()
-    completed = models.BooleanField(default=False)
+    completed = models.BooleanField()
     notes = models.TextField(blank=True)
 
     def __str__(self) -> str:
