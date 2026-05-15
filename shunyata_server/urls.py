@@ -24,7 +24,18 @@ from meditation import views as meditation_views
 
 urlpatterns = [
     path("", meditation_views.index, name="index"),
+    path("register/", meditation_views.register_page, name="register_page"),
     path("admin/", admin.site.urls),
+    path(
+        "api/auth/register/",
+        meditation_views.UserRegistrationView.as_view(),
+        name="register",
+    ),
+    path(
+        "api/auth/verify-email/<str:token>/",
+        meditation_views.VerifyEmailView.as_view(),
+        name="verify_email",
+    ),
     path("api/auth/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/meditations/", include("meditation.urls")),
