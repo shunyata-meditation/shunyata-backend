@@ -30,6 +30,10 @@ def register_page(request):
     return render(request, "meditation/register.html")
 
 
+def timer_page(request):
+    return render(request, "meditation/timer.html")
+
+
 class MeditationSessionViewSet(viewsets.ModelViewSet):
     serializer_class = MeditationSessionSerializer
     permission_classes = [permissions.IsAuthenticated]
