@@ -25,6 +25,7 @@ from meditation import views as meditation_views
 urlpatterns = [
     path("", meditation_views.index, name="index"),
     path("register/", meditation_views.register_page, name="register_page"),
+    path("timer/", meditation_views.timer_page, name="timer_page"),
     path("admin/", admin.site.urls),
     path(
         "api/auth/register/",
