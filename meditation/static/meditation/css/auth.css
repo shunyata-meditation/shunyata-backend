@@ -1,0 +1,213 @@
+/* Authentication Pages - Shared Styles for Login and Register */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-card {
+    background: var(--zen-paper);
+    border: 1px solid var(--zen-clay);
+    padding: 3rem;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 8px 32px var(--zen-shadow);
+    position: relative;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 60px;
+    right: 60px;
+    height: 3px;
+    background: var(--zen-moss);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--zen-charcoal);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--zen-moss);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    color: var(--zen-ink);
+    letter-spacing: 3px;
+}
+
+.auth-header p {
+    color: var(--zen-charcoal);
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--zen-ink);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: var(--zen-stone);
+    border: 1px solid var(--zen-clay);
+    border-radius: 0;
+    color: var(--zen-ink);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--zen-moss);
+    background: var(--zen-paper);
+    box-shadow: 0 0 0 1px var(--zen-moss);
+}
+
+.form-group input::placeholder {
+    color: var(--zen-charcoal);
+    opacity: 0.5;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--zen-moss);
+    color: var(--zen-paper);
+    border: 1px solid var(--zen-moss);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: transparent;
+    color: var(--zen-moss);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.message {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.message.success {
+    background: rgba(107, 142, 107, 0.1);
+    border-color: var(--zen-bamboo);
+    color: var(--zen-bamboo);
+}
+
+.message.error {
+    background: rgba(197, 85, 85, 0.1);
+    border-color: #c55;
+    color: #c55;
+}
+
+.error-text {
+    color: #c55;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--zen-sand);
+}
+
+.auth-footer p {
+    color: var(--zen-charcoal);
+    font-size: 0.875rem;
+}
+
+.auth-footer a {
+    color: var(--zen-moss);
+    text-decoration: none;
+    border-bottom: 1px solid var(--zen-moss);
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: var(--zen-bamboo);
+    border-bottom-color: var(--zen-bamboo);
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+.forgot-password a {
+    color: var(--zen-charcoal);
+    font-size: 0.8rem;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--zen-charcoal);
+}
+
+.forgot-password a:hover {
+    color: var(--zen-moss);
+    border-bottom-color: var(--zen-moss);
+}
+
+@media (max-width: 640px) {
+    .auth-card {
+        padding: 2rem;
+    }
+
+    .auth-card::before {
+        left: 40px;
+        right: 40px;
+    }
+
+    .auth-header h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+}

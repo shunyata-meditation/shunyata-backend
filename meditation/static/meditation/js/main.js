@@ -12,7 +12,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add parallax effect to orbs
     initParallax();
+    
+    // Highlight active page in navigation
+    highlightActivePage();
 });
+
+/**
+ * Highlight the active page in navigation
+ */
+function highlightActivePage() {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        
+        // Exact match or home page special case
+        if (linkPath === currentPath || 
+            (currentPath === '/' && linkPath === '/') ||
+            (currentPath.startsWith(linkPath) && linkPath !== '/' && linkPath.length > 1)) {
+            link.classList.add('active');
+        }
+    });
+}
 
 /**
  * Smooth scrolling for anchor links

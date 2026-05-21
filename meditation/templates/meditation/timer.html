@@ -1,42 +1,16 @@
+{% extends "meditation/base_app.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meditation Timer - Shunyata</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
+
+{% block title %}Meditation Timer - Shunyata{% endblock %}
+
+{% block body_attrs %} class="timer-page"{% endblock %}
+
+{% block extra_css %}
     <link rel="stylesheet" href="{% static 'meditation/css/timer.css' %}">
-</head>
-<body class="timer-page">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+{% endblock %}
 
-    <div class="breathing-container">
-        <div class="breathing-circle"></div>
-        <div class="breathing-circle-2"></div>
-        <div class="breathing-circle-3"></div>
-    </div>
-
-    <div class="container">
-        <header>
-            <div class="logo">
-                <div class="logo-icon">🧘</div>
-                <span class="logo-text">Shunyata</span>
-            </div>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/api/docs/">API Docs</a>
-                <a href="#" id="logout-btn" style="display: none;">Logout</a>
-                <a href="/register" id="register-link">Register</a>
-            </nav>
-        </header>
-
-        <div class="timer-container">
+{% block main_content %}
+    <div class="timer-container">
             <div id="auth-prompt" class="auth-prompt" style="display: none;">
                 <div class="auth-card">
                     <h2>Welcome Back</h2>
@@ -53,7 +27,7 @@
                         <div id="login-error" class="error-message"></div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
-                    <p class="auth-footer">Don't have an account? <a href="/register">Register here</a></p>
+                    <p class="auth-footer">Don't have an account? <a href="/register">Register here</a> | <a href="/login?next=/timer">Login page</a></p>
                 </div>
             </div>
 
@@ -172,17 +146,11 @@
             </div>
         </div>
 
-        <footer>
-            <p>Built with <span class="heart">♥</span> for mindful developers</p>
-            <p class="footer-tagline">Shunyata Meditation API</p>
-        </footer>
-    </div>
-
     <audio id="bell-sound" preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_808ee969a0.mp3" type="audio/mpeg">
     </audio>
+{% endblock %}
 
-    <script src="{% static 'meditation/js/main.js' %}"></script>
+{% block extra_js %}
     <script src="{% static 'meditation/js/timer.js' %}"></script>
-</body>
-</html>
+{% endblock %}

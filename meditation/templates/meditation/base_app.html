@@ -1,0 +1,60 @@
+{% extends "meditation/base.html" %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <a href="/" class="logo" style="text-decoration: none; color: inherit;">
+            <div class="logo-icon">🧘</div>
+            <span class="logo-text">Shunyata</span>
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/timer">Timer</a>
+            <a href="/stats">Stats</a>
+            <a href="/api/docs/">API Docs</a>
+            <a href="#" id="logout-btn" style="display: none;">Logout</a>
+            <a href="/login" id="login-link">Login</a>
+            <a href="/register" id="register-link">Register</a>
+        </nav>
+    </header>
+
+    {% block main_content %}{% endblock %}
+
+    <footer>
+        <p>Built with <span class="heart">♥</span> for mindful developers</p>
+        <p class="footer-tagline">Shunyata Meditation API</p>
+    </footer>
+</div>
+
+<script>
+    // Handle authentication state in navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('access_token');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginLink = document.getElementById('login-link');
+        const registerLink = document.getElementById('register-link');
+        
+        if (token) {
+            // User is authenticated
+            if (logoutBtn) logoutBtn.style.display = 'inline-block';
+            if (loginLink) loginLink.style.display = 'none';
+            if (registerLink) registerLink.style.display = 'none';
+        } else {
+            // User is not authenticated
+            if (logoutBtn) logoutBtn.style.display = 'none';
+            if (loginLink) loginLink.style.display = 'inline-block';
+            if (registerLink) registerLink.style.display = 'inline-block';
+        }
+        
+        // Handle logout
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                window.location.href = '/';
+            });
+        }
+    });
+</script>
+{% endblock %}

@@ -180,3 +180,11 @@ VERIFICATION_EMAIL_EXPIRY_HOURS = int(
     os.getenv("VERIFICATION_EMAIL_EXPIRY_HOURS", "24")
 )
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
+# Security: Allowed Redirect Domains
+# Comma-separated list of external domains allowed for post-login redirects
+ALLOWED_REDIRECT_DOMAINS = (
+    os.getenv("ALLOWED_REDIRECT_DOMAINS", "").split(",")
+    if os.getenv("ALLOWED_REDIRECT_DOMAINS")
+    else []
+)

@@ -1,45 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shunyata - Meditation Tracker API</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
-</head>
-<body>
-    <!-- Background Orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+{% extends "meditation/base_app.html" %}
 
-    <!-- Breathing Animation -->
-    <div class="breathing-container">
-        <div class="breathing-circle"></div>
-        <div class="breathing-circle-2"></div>
-        <div class="breathing-circle-3"></div>
-    </div>
+{% block title %}Shunyata - Meditation Tracker API{% endblock %}
 
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="logo">
-                <div class="logo-icon">🧘</div>
-                <span class="logo-text">Shunyata</span>
-            </div>
-            <nav>
-                <a href="#features">Features</a>
-                <a href="/timer">Timer</a>
-                <a href="/api/docs/">API Docs</a>
-                <a href="/register">Register</a>
-                <a href="/admin">Admin</a>
-            </nav>
-        </header>
-
-        <!-- Hero Section -->
+{% block main_content %}
+    <!-- Hero Section -->
         <section class="hero">
             <h1>Find Your Center</h1>
             <p class="hero-subtitle">
@@ -114,13 +78,4 @@
                 </div>
             </div>
         </section>
-
-        <!-- Footer -->
-        <footer>
-            <p>Built with <span class="heart">♥</span> for mindful developers</p>
-            <p class="footer-tagline">Shunyata Meditation API</p>
-        </footer>
-    </div>
-    <script src="{% static 'meditation/js/main.js' %}"></script>
-</body>
-</html>
+{% endblock %}
