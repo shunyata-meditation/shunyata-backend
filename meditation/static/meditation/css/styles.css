@@ -173,7 +173,8 @@ header {
 
 nav {
     display: flex;
-    gap: 40px;
+    gap: 32px;
+    align-items: center;
 }
 
 nav a {
@@ -182,14 +183,31 @@ nav a {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 1px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid transparent;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 nav a:hover {
     color: var(--zen-moss);
     border-bottom-color: var(--zen-moss);
+}
+
+nav a.active {
+    color: var(--zen-moss);
+    border-bottom-color: var(--zen-moss);
+    font-weight: 500;
+}
+
+#logout-btn {
+    cursor: pointer;
+    color: var(--zen-wood);
+}
+
+#logout-btn:hover {
+    color: var(--zen-ink);
+    border-bottom-color: var(--zen-wood);
 }
 
 /* Hero Section - zen spacious */
@@ -518,7 +536,13 @@ footer .heart {
     }
 
     nav {
-        gap: 28px;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav a {
+        font-size: 13px;
     }
 
     .hero {

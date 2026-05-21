@@ -1,0 +1,174 @@
+{% extends "meditation/base_app.html" %}
+{% load static %}
+
+{% block title %}Statistics - Shunyata{% endblock %}
+
+{% block body_attrs %} class="stats-page"{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'meditation/css/stats.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block main_content %}
+    <!-- Auth Prompt -->
+        <div id="auth-prompt" class="auth-prompt" style="display: none;">
+            <div class="auth-card">
+                <h2>Welcome Back</h2>
+                <p>Please login to view your meditation statistics</p>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div id="login-error" class="error-message"></div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="auth-footer">Don't have an account? <a href="/register">Register here</a></p>
+            </div>
+        </div>
+
+        <!-- Dashboard Main -->
+        <div id="dashboard-main" class="dashboard-container" style="display: none;">
+            <div class="dashboard-header">
+                <h1>Meditation Statistics</h1>
+                <p class="dashboard-subtitle">Track your progress and insights</p>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon">📊</div>
+                    <span class="summary-value" id="total-sessions">0</span>
+                    <span class="summary-label">Total Sessions</span>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">⏱️</div>
+                    <span class="summary-value" id="total-time">0m</span>
+                    <span class="summary-label">Total Time</span>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">📈</div>
+                    <span class="summary-value" id="avg-duration">0m</span>
+                    <span class="summary-label">Average Duration</span>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">🔥</div>
+                    <span class="summary-value" id="current-streak">0</span>
+                    <span class="summary-label">Current Streak</span>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Sessions Over Time</h3>
+                        <div class="chart-container">
+                            <canvas id="timeline-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Meditation Type Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="type-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Average Duration by Type</h3>
+                        <div class="chart-container">
+                            <canvas id="duration-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Completion Rate Trend</h3>
+                        <div class="chart-container">
+                            <canvas id="completion-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="date-range">Date Range</label>
+                        <select id="date-range">
+                            <option value="all">All Time</option>
+                            <option value="7">Last 7 Days</option>
+                            <option value="30" selected>Last 30 Days</option>
+                            <option value="90">Last 90 Days</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="type-filter">Meditation Type</label>
+                        <select id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="mindfulness">Mindfulness</option>
+                            <option value="breathing">Breathing</option>
+                            <option value="body_scan">Body Scan</option>
+                            <option value="loving_kindness">Loving Kindness</option>
+                            <option value="walking">Walking</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="completion-filter">Status</label>
+                        <select id="completion-filter">
+                            <option value="all">All Sessions</option>
+                            <option value="completed">Completed</option>
+                            <option value="incomplete">Incomplete</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="custom-dates" class="filters-grid" style="display: none; margin-top: 16px;">
+                    <div class="filter-group">
+                        <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date">
+                    </div>
+                    <div class="filter-group">
+                        <label for="end-date">End Date</label>
+                        <input type="date" id="end-date">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sessions Table -->
+            <div class="sessions-section">
+                <h2>All Sessions</h2>
+                <div class="sessions-table-container">
+                    <table class="sessions-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-column="start_time">Date & Time</th>
+                                <th class="sortable" data-column="meditation_type">Type</th>
+                                <th class="sortable" data-column="duration">Duration</th>
+                                <th class="sortable" data-column="completed">Status</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sessions-tbody">
+                            <tr>
+                                <td colspan="5" class="loading-message">Loading sessions...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button id="prev-page">Previous</button>
+                    <span class="page-info" id="page-info">Page 1 of 1</span>
+                    <button id="next-page">Next</button>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'meditation/js/stats.js' %}"></script>
+{% endblock %}
