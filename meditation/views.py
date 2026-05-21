@@ -39,7 +39,8 @@ def stats_page(request):
 
 
 def login_page(request):
-    return render(request, "meditation/login.html")
+    context = {"allowed_redirect_domains": settings.ALLOWED_REDIRECT_DOMAINS}
+    return render(request, "meditation/login.html", context)
 
 
 class MeditationSessionViewSet(viewsets.ModelViewSet):

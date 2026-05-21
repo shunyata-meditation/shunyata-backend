@@ -123,7 +123,11 @@ async function loadDashboard() {
                 registerLink.style.display = 'none';
             }
             
-            renderDashboard();
+            // Setup filters once (not in render cycle)
+            setupFilters();
+            
+            // Apply initial filters to match UI ("Last 30 Days" is selected by default)
+            applyFilters();
         } else if (response.status === 401) {
             // Token expired, show login
             localStorage.removeItem('access_token');
@@ -149,7 +153,6 @@ function renderDashboard() {
     renderSummaryCards();
     renderCharts();
     renderSessionsTable();
-    setupFilters();
 }
 
 /**
@@ -579,33 +582,58 @@ function renderSessionsTable() {
     const end = start + sessionsPerPage;
     const paginated = sorted.slice(start, end);
     
-    tbody.innerHTML = paginated.map(session => `
-        <tr>
-            <td>${new Date(session.start_time).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            })}</td>
-            <td>
-                <span class="type-badge-table">
-                    ${session.meditation_type.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
-                </span>
-            </td>
-            <td>${formatDuration(parseDuration(session.duration))}</td>
-            <td>
-                <span class="status-badge ${session.completed ? 'completed' : 'incomplete'}">
-                    ${session.completed ? 'Completed' : 'Incomplete'}
-                </span>
-            </td>
-            <td>
-                <span class="session-notes" title="${session.notes || ''}">
-                    ${session.notes || '-'}
-                </span>
-            </td>
-        </tr>
-    `).join('');
+    // Clear existing rows
+    tbody.innerHTML = '';
+    
+    // Create rows using DOM manipulation to prevent XSS
+    paginated.forEach(session => {
+        const tr = document.createElement('tr');
+        
+        // Date & Time column
+        const tdDate = document.createElement('td');
+        tdDate.textContent = new Date(session.start_time).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        tr.appendChild(tdDate);
+        
+        // Type column
+        const tdType = document.createElement('td');
+        const typeBadge = document.createElement('span');
+        typeBadge.className = 'type-badge-table';
+        typeBadge.textContent = session.meditation_type.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        tdType.appendChild(typeBadge);
+        tr.appendChild(tdType);
+        
+        // Duration column
+        const tdDuration = document.createElement('td');
+        tdDuration.textContent = formatDuration(parseDuration(session.duration));
+        tr.appendChild(tdDuration);
+        
+        // Status column
+        const tdStatus = document.createElement('td');
+        const statusBadge = document.createElement('span');
+        statusBadge.className = `status-badge ${session.completed ? 'completed' : 'incomplete'}`;
+        statusBadge.textContent = session.completed ? 'Completed' : 'Incomplete';
+        tdStatus.appendChild(statusBadge);
+        tr.appendChild(tdStatus);
+        
+        // Notes column (XSS-safe)
+        const tdNotes = document.createElement('td');
+        const notesSpan = document.createElement('span');
+        notesSpan.className = 'session-notes';
+        notesSpan.textContent = session.notes || '-';
+        if (session.notes) {
+            notesSpan.setAttribute('title', session.notes);
+        }
+        tdNotes.appendChild(notesSpan);
+        tr.appendChild(tdNotes);
+        
+        tbody.appendChild(tr);
+    });
     
     renderPagination();
 }

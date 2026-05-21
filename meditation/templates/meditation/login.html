@@ -47,5 +47,6 @@
 {% endblock %}
 
 {% block extra_js %}
+    {{ allowed_redirect_domains|json_script:"allowed-redirect-domains" }}
     <script src="{% static 'meditation/js/login.js' %}"></script>
 {% endblock %}

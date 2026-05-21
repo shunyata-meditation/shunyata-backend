@@ -15,12 +15,65 @@ function showMessage(message, type) {
 }
 
 /**
+ * Check if a URL is a valid redirect target
+ * @param {string} url - The URL to validate
+ * @param {string[]} allowedDomains - List of allowed external domains
+ * @returns {boolean} - True if URL is safe to redirect to
+ */
+function isValidRedirectUrl(url, allowedDomains) {
+    // Empty or null URL is invalid
+    if (!url) return false;
+    
+    try {
+        // Check if it's a relative path (same-origin)
+        if (url.startsWith('/') && !url.startsWith('//')) {
+            return true;
+        }
+        
+        // Parse as absolute URL
+        const urlObj = new URL(url, window.location.origin);
+        
+        // Check if same origin
+        if (urlObj.origin === window.location.origin) {
+            return true;
+        }
+        
+        // Check if domain is in allowed list
+        if (allowedDomains && allowedDomains.length > 0) {
+            const hostname = urlObj.hostname;
+            return allowedDomains.some(domain => {
+                // Exact match or subdomain match
+                return hostname === domain || hostname.endsWith('.' + domain);
+            });
+        }
+        
+        // Not same-origin and not in allowed list
+        return false;
+    } catch (e) {
+        // Invalid URL format
+        return false;
+    }
+}
+
+/**
  * Get redirect URL from query parameter or default to /timer
+ * Validates the URL to prevent open redirect attacks
  */
 function getRedirectUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const next = urlParams.get('next');
-    return next || '/timer';
+    
+    // Get allowed domains from Django template
+    const allowedDomainsElement = document.getElementById('allowed-redirect-domains');
+    const allowedDomains = allowedDomainsElement ? JSON.parse(allowedDomainsElement.textContent) : [];
+    
+    // Validate the redirect URL
+    if (next && isValidRedirectUrl(next, allowedDomains)) {
+        return next;
+    }
+    
+    // Default to /timer if no valid redirect URL
+    return '/timer';
 }
 
 /**
@@ -80,7 +133,8 @@ form.addEventListener('submit', async (e) => {
 document.addEventListener('DOMContentLoaded', function() {
     const token = localStorage.getItem('access_token');
     if (token) {
-        // Already logged in, redirect
-        window.location.href = getRedirectUrl();
+        // Already logged in, redirect to validated URL
+        const redirectUrl = getRedirectUrl();
+        window.location.href = redirectUrl;
     }
 });
