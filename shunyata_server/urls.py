@@ -22,6 +22,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from meditation import views as meditation_views
 
+admin.site.site_header = "Shunyata admin"
+admin.site.site_title = "Shunyata admin"
+admin.site.index_title = "Shunyata admin"
+
 urlpatterns = [
     path("", meditation_views.index, name="index"),
     path("register/", meditation_views.register_page, name="register_page"),
