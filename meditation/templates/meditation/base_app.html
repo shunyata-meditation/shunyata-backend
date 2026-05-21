@@ -13,6 +13,7 @@
             <a href="/stats">Stats</a>
             <a href="/api/docs/">API Docs</a>
             <a href="#" id="logout-btn" style="display: none;">Logout</a>
+            <a href="/login" id="login-link">Login</a>
             <a href="/register" id="register-link">Register</a>
         </nav>
     </header>
@@ -30,11 +31,19 @@
     document.addEventListener('DOMContentLoaded', function() {
         const token = localStorage.getItem('access_token');
         const logoutBtn = document.getElementById('logout-btn');
+        const loginLink = document.getElementById('login-link');
         const registerLink = document.getElementById('register-link');
         
-        if (token && logoutBtn && registerLink) {
-            logoutBtn.style.display = 'inline-block';
-            registerLink.style.display = 'none';
+        if (token) {
+            // User is authenticated
+            if (logoutBtn) logoutBtn.style.display = 'inline-block';
+            if (loginLink) loginLink.style.display = 'none';
+            if (registerLink) registerLink.style.display = 'none';
+        } else {
+            // User is not authenticated
+            if (logoutBtn) logoutBtn.style.display = 'none';
+            if (loginLink) loginLink.style.display = 'inline-block';
+            if (registerLink) registerLink.style.display = 'inline-block';
         }
         
         // Handle logout
