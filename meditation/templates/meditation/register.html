@@ -1,15 +1,10 @@
+{% extends "meditation/base_auth.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Shunyata</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
-    <style>
+
+{% block title %}Register - Shunyata{% endblock %}
+
+{% block extra_css %}
+<style>
         .auth-container {
             min-height: 100vh;
             display: flex;
@@ -208,16 +203,11 @@
                 letter-spacing: 2px;
             }
         }
-    </style>
-</head>
-<body>
-    <!-- Background Orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+</style>
+{% endblock %}
 
-    <div class="auth-container">
-        <div class="auth-card">
+{% block auth_content %}
+<div class="auth-card">
             <a href="/" class="back-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -263,10 +253,11 @@
             <div class="auth-footer">
                 <p>Already have an account? <a href="/api/docs/">Login via API</a></p>
             </div>
-        </div>
-    </div>
+</div>
+{% endblock %}
 
-    <script>
+{% block extra_js %}
+<script>
         const form = document.getElementById('registration-form');
         const submitBtn = document.getElementById('submit-btn');
         const messageContainer = document.getElementById('message-container');
@@ -354,6 +345,5 @@
                 submitBtn.textContent = 'Create Account';
             }
         });
-    </script>
-</body>
-</html>
+</script>
+{% endblock %}
