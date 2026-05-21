@@ -1,0 +1,22 @@
+{% extends "meditation/base.html" %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <a href="/" class="logo" style="text-decoration: none; color: inherit;">
+            <div class="logo-icon">🧘</div>
+            <span class="logo-text">Shunyata</span>
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/timer">Timer</a>
+            <a href="/stats">Stats</a>
+            <a href="/api/docs/">API Docs</a>
+        </nav>
+    </header>
+</div>
+
+<div class="auth-container">
+    {% block auth_content %}{% endblock %}
+</div>
+{% endblock %}

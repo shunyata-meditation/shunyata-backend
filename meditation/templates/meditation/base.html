@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Shunyata - Meditation Tracker{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body{% if body_class %} class="{{ body_class }}"{% endif %}{% block body_attrs %}{% endblock %}>
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Breathing Animation -->
+    <div class="breathing-container">
+        <div class="breathing-circle"></div>
+        <div class="breathing-circle-2"></div>
+        <div class="breathing-circle-3"></div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <script src="{% static 'meditation/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
