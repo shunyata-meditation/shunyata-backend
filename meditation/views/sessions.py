@@ -8,8 +8,8 @@ class MeditationSessionViewSet(viewsets.ModelViewSet):
     serializer_class = MeditationSessionSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self):
-        return MeditationSession.objects.filter(user=self.request.user)  # type: ignore[return-value]
+    def get_queryset(self):  # type: ignore[override]
+        return MeditationSession.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
