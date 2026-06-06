@@ -40,6 +40,12 @@ ALLOWED_HOSTS = (
     else []
 )
 
+CSRF_TRUSTED_ORIGINS = (
+    os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
+    if os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS")
+    else []
+)
+
 
 # Application definition
 
