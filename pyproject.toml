@@ -14,3 +14,16 @@ dependencies = [
     "gunicorn>=23.0.0",
     "whitenoise>=6.9.0",
 ]
+
+[dependency-groups]
+dev = [
+    "django-stubs[compatible-mypy]>=5.0.0",
+    "djangorestframework-stubs[compatible-mypy]>=3.0.0",
+]
+
+[tool.mypy]
+python_version = "3.13"
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "shunyata_backend.settings"
