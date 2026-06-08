@@ -304,6 +304,37 @@ class UserRegistrationViewTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
+class LoginViewTest(APITestCase):
+    def setUp(self):
+        self.client = APIClient()
+        User.objects.create_user(
+            username="TestUser",
+            email="test@example.com",
+            password="testpass123",
+        )
+        self.url = reverse("token_obtain_pair")
+
+    def test_login_case_insensitive_username(self):
+        response = self.client.post(
+            self.url,
+            {"username": "testuser", "password": "testpass123"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+        self.assertIn("refresh", response.data)
+
+    def test_login_wrong_password(self):
+        response = self.client.post(
+            self.url,
+            {"username": "TestUser", "password": "wrongpassword"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
 @override_settings(
     VERIFICATION_EMAIL_EXPIRY_HOURS=24, FRONTEND_URL="http://localhost:3000"
 )

@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from meditation.constants import (
     VERIFICATION_EMAIL_MESSAGE,
@@ -13,9 +14,16 @@ from meditation.constants import (
     VERIFICATION_URL,
 )
 from meditation.models import EmailVerificationToken
-from meditation.serializers import UserRegistrationSerializer
+from meditation.serializers import (
+    CaseInsensitiveTokenObtainPairSerializer,
+    UserRegistrationSerializer,
+)
 
 logger = logging.getLogger(__name__)
+
+
+class CaseInsensitiveTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CaseInsensitiveTokenObtainPairSerializer
 
 
 def _send_verification_email(user: User) -> None:

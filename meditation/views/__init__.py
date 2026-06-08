@@ -1,4 +1,8 @@
-from meditation.views.auth import UserRegistrationView, VerifyEmailView
+from meditation.views.auth import (
+    CaseInsensitiveTokenObtainPairView,
+    UserRegistrationView,
+    VerifyEmailView,
+)
 from meditation.views.pages import (
     index,
     login_page,
@@ -15,6 +19,7 @@ __all__ = [
     "stats_page",
     "timer_page",
     "MeditationSessionViewSet",
+    "CaseInsensitiveTokenObtainPairView",
     "UserRegistrationView",
     "VerifyEmailView",
 ]

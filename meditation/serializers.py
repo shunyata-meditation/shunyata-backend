@@ -1,8 +1,21 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from meditation.models import MeditationSession
+
+
+class CaseInsensitiveTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        username = attrs.get(self.username_field)
+        if username:
+            try:
+                user = User.objects.get(username__iexact=username)
+                attrs[self.username_field] = user.username
+            except User.DoesNotExist:
+                pass
+        return super().validate(attrs)
 
 
 class MeditationSessionSerializer(serializers.ModelSerializer):
