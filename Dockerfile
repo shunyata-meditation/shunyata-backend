@@ -18,4 +18,4 @@ RUN uv run python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "uv run python manage.py migrate && uv run gunicorn shunyata_server.wsgi:application --bind 0.0.0.0:8000 --workers 3"]
+CMD ["sh", "-c", "uv run python manage.py migrate && uv run gunicorn shunyata_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3"]

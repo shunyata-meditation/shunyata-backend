@@ -1,4 +1,4 @@
-# Shunyata Server
+# Shunyata Backend
 
 Backend server for the Shunyata meditation tracking app. Built with Django and Django REST Framework, it provides a REST API for logging and managing meditation sessions, along with a server-rendered web interface.
 
@@ -24,8 +24,8 @@ Backend server for the Shunyata meditation tracking app. Built with Django and D
 1. Clone the repository and install dependencies:
 
 ```bash
-git clone git@github.com:shunyata-meditation/shunyata-server.git
-cd shunyata-server
+git clone git@github.com:shunyata-meditation/shunyata-backend.git
+cd shunyata-backend
 uv sync
 ```
 
@@ -137,26 +137,26 @@ Images are published to GitHub Container Registry on every push to `main` and on
 
 ```bash
 # latest build from main
-docker pull ghcr.io/shunyata-meditation/shunyata-server:latest
+docker pull ghcr.io/shunyata-meditation/shunyata-backend:latest
 
 # specific commit
-docker pull ghcr.io/shunyata-meditation/shunyata-server:f4db0ed
+docker pull ghcr.io/shunyata-meditation/shunyata-backend:f4db0ed
 
 # specific release
-docker pull ghcr.io/shunyata-meditation/shunyata-server:1.2.0
+docker pull ghcr.io/shunyata-meditation/shunyata-backend:1.2.0
 ```
 
 Run the pulled image:
 
 ```bash
-docker run -p 8000:8000 --env-file .env ghcr.io/shunyata-meditation/shunyata-server:latest
+docker run -p 8000:8000 --env-file .env ghcr.io/shunyata-meditation/shunyata-backend:latest
 ```
 
 ### Building locally
 
 ```bash
-docker build -t shunyata-server .
-docker run -p 8000:8000 --env-file .env shunyata-server
+docker build -t shunyata-backend .
+docker run -p 8000:8000 --env-file .env shunyata-backend
 ```
 
 The container entrypoint runs `migrate` before starting gunicorn, so no separate migration step is needed on deploy.

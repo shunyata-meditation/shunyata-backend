@@ -28,7 +28,7 @@ uv sync
 
 ## Architecture
 
-**Project layout**: `shunyata_server/` is the Django project config package; `meditation/` is the single Django app containing all models, views, serializers, and templates.
+**Project layout**: `shunyata_backend/` is the Django project config package; `meditation/` is the single Django app containing all models, views, serializers, and templates.
 
 **Database**: PostgreSQL. Configure via env vars (`DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`). Copy `.env.example` to `.env` before first run.
 

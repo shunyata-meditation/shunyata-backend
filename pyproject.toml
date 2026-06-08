@@ -1,5 +1,5 @@
 [project]
-name = "shunyata-server"
+name = "shunyata-backend"
 version = "0.1.0"
 description = "Backend server for Shunyata meditation app"
 readme = "README.md"

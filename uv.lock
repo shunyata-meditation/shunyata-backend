@@ -298,7 +298,7 @@ wheels = [
 ]
 
 [[package]]
-name = "shunyata-server"
+name = "shunyata-backend"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
